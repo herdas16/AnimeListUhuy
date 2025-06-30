@@ -1,7 +1,15 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // Import HomeScreen yang sudah dibuat
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart'; // Ini file yang di-generate flutterfire configure
 
-void main() {
+import 'package:belajar/auth_check_screen.dart'; // <<< Import AuthCheckScreen
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -13,10 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Anime App',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(), // Mengarahkan ke HomeScreen sebagai halaman awal
+      home: const AuthCheckScreen(), // <-- Ini gerbang utamanya
     );
   }
 }
